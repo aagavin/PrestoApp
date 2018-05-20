@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { PrestoConstants } from "../../constants/prestoConstants";
 import { Storage } from '@ionic/storage';
 
 @IonicPage()
@@ -20,7 +21,7 @@ export class AddPage {
   }
 
   public async addAccount(): Promise<any> {
-    let accounts: object = await this.storage.get('accounts');
+    let accounts: object = await this.storage.get(PrestoConstants.AccountDb);
 
     if (accounts == null) { accounts = {}; }
     accounts[this.username] = this.password;

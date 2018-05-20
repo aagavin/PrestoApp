@@ -1,8 +1,9 @@
-import {forkJoin} from 'rxjs/observable/forkJoin';
+import { forkJoin } from 'rxjs/observable/forkJoin';
 import { Component } from '@angular/core';
 import { NavController, IonicPage } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { ServiceProvider } from '../../providers/service/service';
+import { PrestoConstants } from "../../constants/prestoConstants";
 import { Observable } from 'rxjs/Observable';
 
 @IonicPage()
@@ -23,8 +24,8 @@ export class HomePage {
    * @memberof HomePage
    */
   constructor(public navCtrl: NavController, private service: ServiceProvider, private storage: Storage) {
-    this.storage.get('accounts').then((value: object) => {
-      
+    this.storage.get(PrestoConstants.AccountDb).then((value: object) => {
+
       for (const key in value) {
         if (value.hasOwnProperty(key)) {
           this.service.getBalance(key, value[key]).subscribe((data: Array<any>) => this.prestoData.push({ 'username': key, 'cardData': data }));
@@ -35,7 +36,7 @@ export class HomePage {
   }
 
   public clickHandler(usertable: {}[]) {
-    this.navCtrl.push('DetailsPage', {userData: usertable});    
+    this.navCtrl.push('DetailsPage', { userData: usertable });
   }
 
   /**
