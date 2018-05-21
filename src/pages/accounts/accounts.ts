@@ -11,14 +11,14 @@ import { PrestoConstants } from "../../constants/prestoConstants";
 })
 export class AccountsPage {
 
-  public accounts = [];
+  public accounts = {};
+  public keys = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private storage:Storage) {
-  }
+  constructor(public navCtrl: NavController, public navParams: NavParams, private storage:Storage) { }
 
   public async ionViewDidEnter(){
     this.accounts = await this.storage.get(PrestoConstants.AccountDb);
-    console.log(this.accounts);
+    this.keys = Object.keys(this.accounts);
   }
 
   ionViewDidLoad() {
