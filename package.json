@@ -1,8 +1,8 @@
 {
   "name": "presto",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "version": "0.1.1",
+  "author": "aaron",
+  "homepage": "https://www.prestocard.ca/en/",
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",
