@@ -4,7 +4,6 @@ import { NavController, IonicPage } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { ServiceProvider } from '../../providers/service/service';
 import { PrestoConstants } from "../../constants/prestoConstants";
-import { Observable } from 'rxjs/Observable';
 
 @IonicPage()
 @Component({
