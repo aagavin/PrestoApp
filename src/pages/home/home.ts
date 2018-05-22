@@ -1,4 +1,3 @@
-import { forkJoin } from 'rxjs/observable/forkJoin';
 import { Component } from '@angular/core';
 import { NavController, IonicPage } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
@@ -34,6 +33,12 @@ export class HomePage {
 
   }
 
+  /**
+   * Go to details page
+   * 
+   * @param {{}[]} usertable 
+   * @memberof HomePage
+   */
   public clickHandler(usertable: {}[]) {
     this.navCtrl.push('DetailsPage', { userData: usertable });
   }
@@ -42,7 +47,7 @@ export class HomePage {
    * addNewAccount
    */
   public addNewAccount() {
-    this.navCtrl.push('AccountsPage');
+    this.navCtrl.push('AddPage');
   }
 
 }
