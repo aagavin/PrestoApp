@@ -12,7 +12,6 @@ export class DetailsPage {
   public userTable: UserTable = {balance: {balance: '', userTable: []}};
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    console.log(navParams.get('userData'));
     this.userTable = navParams.get('userData');
   }
 

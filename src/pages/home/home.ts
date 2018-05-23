@@ -13,7 +13,6 @@ export class HomePage {
 
   public prestoData: Array<any> = [];
 
-
   /**
    * Creates an instance of HomePage.
    * @param {NavController} navCtrl 
@@ -22,14 +21,18 @@ export class HomePage {
    * @memberof HomePage
    */
   constructor(public navCtrl: NavController, private service: ServiceProvider, private storage: Storage) {
-    this.storage.get(PrestoConstants.AccountDb).then((value: object) => {
 
-      for (const key in value) {
-        if (value.hasOwnProperty(key)) {
-          this.service.getBalance(key, value[key]).subscribe((data: Array<any>) => this.prestoData.push({ 'username': key, 'cardData': data }));
-        }
+  }
+
+  public async ionViewWillEnter(){
+    this.prestoData = [];
+    const value = await this.storage.get(PrestoConstants.AccountDb);
+
+    for (const key in value) {
+      if (value.hasOwnProperty(key)) {
+        this.service.getBalance(key, value[key]).subscribe((data: Array<any>) => this.prestoData.push({ 'username': key, 'cardData': data }));
       }
-    });
+    }
 
   }
 
