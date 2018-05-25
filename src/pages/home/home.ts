@@ -21,19 +21,13 @@ export class HomePage {
    * @memberof HomePage
    */
   constructor(public navCtrl: NavController, private service: ServiceProvider, private storage: Storage) {
-
-  }
-
-  public async ionViewWillEnter(){
-    this.prestoData = [];
-    const value = await this.storage.get(PrestoConstants.AccountDb);
-
-    for (const key in value) {
-      if (value.hasOwnProperty(key)) {
-        this.service.getBalance(key, value[key]).subscribe((data: Array<any>) => this.prestoData.push({ 'username': key, 'cardData': data }));
+    this.storage.get(PrestoConstants.AccountDb).then(value => {
+      for (const key in value) {
+        if (value.hasOwnProperty(key)) {
+          this.service.getBalance(key, value[key]).subscribe((data: Array<any>) => this.prestoData.push({ 'username': key, 'cardData': data }));
+        }
       }
-    }
-
+    });
   }
 
   /**

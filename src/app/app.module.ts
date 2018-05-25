@@ -27,9 +27,9 @@ import { ServiceProvider } from '../providers/service/service';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     HttpClientModule,
     ServiceProvider
   ]
 })
-export class AppModule {}
+export class AppModule { }

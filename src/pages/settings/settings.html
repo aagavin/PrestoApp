@@ -12,12 +12,14 @@
 
 <ion-content>
   <ion-card>
-    <ion-list>
-      <ion-item>
-        <ion-icon name="flask" item-start></ion-icon>
-        <ion-label>Mock data</ion-label>
-        <ion-toggle [(ngModel)]="settings['mock']"></ion-toggle>
-      </ion-item>
-    </ion-list>
+    <form #settingsForm="ngForm">
+      <ion-list>
+        <ion-item>
+          <ion-icon name="flask" item-start></ion-icon>
+          <ion-label>Mock data</ion-label>
+          <ion-toggle [(ngModel)]="settings.getValue().mock"></ion-toggle>
+        </ion-item>
+      </ion-list>
+    </form>
   </ion-card>
 </ion-content>
