@@ -12,12 +12,16 @@
 
 <ion-content>
   <ion-card>
-    <ion-list>
-      <ion-item>
-        <ion-icon name="flask" item-start></ion-icon>
-        <ion-label>Mock data</ion-label>
-        <ion-toggle [(ngModel)]="settings['mock']"></ion-toggle>
-      </ion-item>
-    </ion-list>
+    <form novalidate [formGroup]="myForm">
+      <ion-list>
+        <div class="form-group">
+          <ion-item>
+            <ion-icon name="flask" item-start></ion-icon>
+            <ion-label>Mock data</ion-label>
+            <ion-toggle formControlName="mock" class="form-control"></ion-toggle>
+          </ion-item>
+        </div>
+      </ion-list>
+    </form>
   </ion-card>
 </ion-content>
