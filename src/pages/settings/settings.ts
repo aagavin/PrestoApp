@@ -21,13 +21,11 @@ export class SettingsPage {
     this.myForm = new FormGroup({
       mock: new FormControl()
     });
-
   }
 
   public async ionViewDidLoad(){
-    console.log(JSON.stringify(this.settingsManagerProvider.getSettings()));
     
-    // this.myForm.setValue();
+    this.myForm.setValue(await this.settingsManagerProvider.getSettings());
 
     this.myForm.valueChanges.subscribe(async change => {
       await this.settingsManagerProvider.saveSettings(change);
