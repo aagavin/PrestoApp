@@ -1,7 +1,6 @@
 PrestoApp
 ===
 
-
 ## Home Page
 
 ![](./.github/home.png)
@@ -15,3 +14,16 @@ PrestoApp
 ## Edit Account
 
 ![](./.github/account_edit.png)
+
+
+## Setup
+
+### Install 
+ * nodejs
+ * Android/iOS SDK (for building app)
+ * Ionic (`npm install -g ionic`)
+ * Cordova (`npm install -g cordova`)
+ 
+### Build
+* `ionic cordova platform add {android|ios}`
+* `ionic cordova build {android|ios}`
