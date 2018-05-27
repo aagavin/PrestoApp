@@ -6,28 +6,35 @@ import { PrestoConstants } from '../../constants/prestoConstants';
 @Injectable()
 export class SettingsManagerProvider {
 
-  private settings: Settings = new Settings();
+  private settings: Settings = {mock: true};
 
   constructor(private storage: Storage) {
-    this.storage.get(PrestoConstants.SettingsKey).then(settings =>{
-      this.settings = settings;
+    this.storage.get(PrestoConstants.SettingsKey).then(settings => {
+      
+      if (typeof settings !== 'undefined' && settings != null) {
+        this.settings = settings;
+      }
+      else{
+        this.storage.set(PrestoConstants.SettingsKey, this.settings);
+      }
+      
     });
   }
 
-  public async saveSettings(settings: Settings){
+  public async saveSettings(settings: Settings) {
     this.settings = settings;
     await this.storage.set(PrestoConstants.SettingsKey, settings);
   }
 
-  public getSettings(): Settings{
-    return this.settings;
+  public async getSettings(): Promise<Settings> {
+    return await this.storage.get(PrestoConstants.SettingsKey);
   }
-  
 
-  
-  public get mock() : boolean {
+
+
+  public get mock(): boolean {
     return this.settings.mock;
   }
-  
+
 
 }
