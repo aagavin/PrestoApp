@@ -15,25 +15,23 @@ export class ServiceProvider {
   }
 
   public getBalance(username: string, password: string): Observable<object> {
-    
-    const url = `${this.baseUrl}/presto/balance`;
-    let headers: HttpHeaders;
 
-    switch (this.settingsManagerProvider.mock) {
-      case true:
-        headers = new HttpHeaders()
-          .set('mock', 'true')
-          .set('username', username)
-          .set('password', password);
-        return this.http.get(url, {headers: headers});
-      case false:
-        headers = new HttpHeaders()
-          .set('mock', 'false')
-          .set('username', username)
-          .set('password', password);
-        return this.http.get(url, {headers: headers});
-      default:
-        break;
+    const url = `${this.baseUrl}/presto/balance`;
+
+
+    if (this.settingsManagerProvider.mock) {
+      const headers = new HttpHeaders()
+        .set('mock', 'true')
+        .set('username', username)
+        .set('password', password);
+      return this.http.get(url, { headers: headers });
+    }
+    else {
+      const headers = new HttpHeaders()
+        .set('mock', 'false')
+        .set('username', username)
+        .set('password', password);
+      return this.http.get(url, { headers: headers });
     }
   }
 
