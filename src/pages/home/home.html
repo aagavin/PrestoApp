@@ -9,14 +9,14 @@
 
 <ion-content>
 
-  <ion-card *ngFor="let card of prestoData" (click)="clickHandler(card.cardData.balance.userTable)">
+  <ion-card *ngFor="let card of prestoData" (click)="clickHandler(card.cardData.userTable)">
     <ion-card-header>
       <h1>
         {{card.username}}
       </h1>
     </ion-card-header>
     <ion-card-content>
-      Balance: {{card.cardData.balance.balance}}
+      Balance: {{card.cardData.balance}}
     </ion-card-content>
   </ion-card>
 
