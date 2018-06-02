@@ -1,8 +1,9 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
-import { IonicStorageModule } from '@ionic/storage';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { IonicStorageModule } from '@ionic/storage';
+import { CacheModule } from "ionic-cache";
 
 import { MyApp } from './app.component';
 
@@ -19,6 +20,7 @@ import { SettingsManagerProvider } from '../providers/settings-manager/settings-
     HttpClientModule,
     IonicStorageModule.forRoot(),
     IonicModule.forRoot(MyApp),
+    CacheModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
