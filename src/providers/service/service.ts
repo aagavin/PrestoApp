@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { CacheService } from "ionic-cache";
 import { SettingsManagerProvider } from "../settings-manager/settings-manager";
 
 
@@ -9,7 +10,12 @@ export class ServiceProvider {
 
   private static readonly baseUrl = "https://l8ck7zpfi0.execute-api.us-east-1.amazonaws.com/presto";
 
-  constructor(public http: HttpClient, private settingsManagerProvider: SettingsManagerProvider) {
+  constructor(
+    public http: HttpClient,
+    private settingsManagerProvider: SettingsManagerProvider,
+    private cache: CacheService
+  ) {
+    cache.setDefaultTTL(300);
     console.log('Hello ServiceProvider Provider');
   }
 
@@ -31,10 +37,12 @@ export class ServiceProvider {
     //   return this.http.get(url, { headers: headers });
     // }
 
-    return this.http.post(ServiceProvider.baseUrl, {
+    let request = this.http.post(ServiceProvider.baseUrl, {
       'username': username,
       'password': password
     });
+
+    return this.cache.loadFromObservable(ServiceProvider.baseUrl, request);
   }
 
 }
