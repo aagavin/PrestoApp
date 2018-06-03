@@ -21,28 +21,18 @@ export class ServiceProvider {
 
   public getBalance(username: string, password: string): Observable<object> {
 
-    // TODO: Add mock response
-    // if (this.settingsManagerProvider.mock) {
-    //   const headers = new HttpHeaders()
-    //     .set('mock', 'true')
-    //     .set('username', username)
-    //     .set('password', password);
-    //   return this.http.get(url, { headers: headers });
-    // }
-    // else {
-    //   const headers = new HttpHeaders()
-    //     .set('mock', 'false')
-    //     .set('username', username)
-    //     .set('password', password);
-    //   return this.http.get(url, { headers: headers });
-    // }
-
-    let request = this.http.post(ServiceProvider.baseUrl, {
+    let body = {
       'username': username,
       'password': password
-    });
+    }
 
-    return this.cache.loadFromObservable(ServiceProvider.baseUrl, request);
+    if (this.settingsManagerProvider.mock) {
+      body['mock'] = true;
+    }
+
+    const request = this.http.post(ServiceProvider.baseUrl, body);
+
+    return this.cache.loadFromObservable(username, request);
   }
 
 }
