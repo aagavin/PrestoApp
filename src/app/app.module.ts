@@ -3,6 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { CodePush } from '@ionic-native/code-push';
 
 import { MyApp } from './app.component';
 
@@ -29,7 +30,8 @@ import { SettingsManagerProvider } from '../providers/settings-manager/settings-
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     HttpClientModule,
-    SettingsManagerProvider
+    SettingsManagerProvider,
+    CodePush
   ]
 })
 export class AppModule { }
