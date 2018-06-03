@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { CodePush, InstallMode } from '@ionic-native/code-push';
 
 @Component({
   templateUrl: 'app.html'
@@ -13,7 +14,7 @@ export class MyApp {
 
   pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private codePush: CodePush) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -21,7 +22,7 @@ export class MyApp {
       { title: 'Home', component: 'HomePage' },
       { title: 'Accounts', component: 'AccountsPage' },
       { title: 'New Account', component: 'AddPage' },
-      { title: 'Settings', component: 'SettingsPage'}
+      { title: 'Settings', component: 'SettingsPage' }
     ];
 
   }
@@ -32,7 +33,35 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+
+      try {
+        // this.codePush.sync().subscribe(syncStatus => console.log(syncStatus));
+        this.checkCodePush()
+      }
+      catch (err) {
+        console.log(err);
+      }
     });
+  }
+
+  checkCodePush() {
+
+    this.codePush.sync({
+      updateDialog: {
+        appendReleaseDescription: true,
+        descriptionPrefix: "\n\nChange log:\n"
+      },
+      installMode: InstallMode.IMMEDIATE
+    }).subscribe(
+      (data) => {
+        console.log('CODE PUSH SUCCESSFUL: ' + data);
+
+      },
+      (err) => {
+        console.log('CODE PUSH ERROR: ' + err);
+
+      }
+    );
   }
 
   openPage(page) {
