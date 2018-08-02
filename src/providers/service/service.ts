@@ -15,24 +15,29 @@ export class ServiceProvider {
     private settingsManagerProvider: SettingsManagerProvider,
     private cache: CacheService
   ) {
-    cache.setDefaultTTL(300);
+    this.cache.setDefaultTTL(1200);
+    this.cache.setOfflineInvalidate(false);
     console.log('Hello ServiceProvider Provider');
   }
 
-  public getBalance(username: string, password: string): Observable<object> {
+  public getCookies(username: string, password: string): Observable<Array<object>> {
 
     let body = {
       'username': username,
       'password': password
     }
 
-    if (this.settingsManagerProvider.mock) {
-      body['mock'] = true;
-    }
+    const cookies_request = this.http.post(ServiceProvider.baseUrl+'/cookies', body);
+    return this.cache.loadFromObservable(username+'cookies', cookies_request);
+  }
 
-    const request = this.http.post(ServiceProvider.baseUrl, body);
+  public getBalance(username: string, cookies: Array<object>): Observable<object>{
+    console.log('cookies');
+    console.log(cookies);
 
-    return this.cache.loadFromObservable(username, request);
+    const balance_request = this.http.post(ServiceProvider.baseUrl + '/balance', {"cookies": cookies});
+    return this.cache.loadFromObservable(username+'balance', balance_request);
+    
   }
 
 }

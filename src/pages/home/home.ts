@@ -24,7 +24,11 @@ export class HomePage {
     this.storage.get(PrestoConstants.AccountDb).then(value => {
       for (const key in value) {
         if (value.hasOwnProperty(key)) {
-          this.service.getBalance(key, value[key]).subscribe((data: Array<any>) => this.prestoData.push({ 'username': key, 'cardData': data }));
+          this.service.getCookies(key, value[key]).subscribe((cookies:Array<object>) =>{ 
+            
+            this.service.getBalance(key, cookies).subscribe(data => this.prestoData.push({ 'username': key, 'cardData': data }));
+          
+          });
         }
       }
     });
