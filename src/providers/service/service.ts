@@ -8,11 +8,11 @@ import { SettingsManagerProvider } from "../settings-manager/settings-manager";
 @Injectable()
 export class ServiceProvider {
 
-  private static readonly baseUrl = "https://l8ck7zpfi0.execute-api.us-east-1.amazonaws.com/presto";
+  private static readonly BASEURL = "https://l8ck7zpfi0.execute-api.us-east-1.amazonaws.com/presto";
 
   constructor(
     public http: HttpClient,
-    private settingsManagerProvider: SettingsManagerProvider,
+    // private settingsManagerProvider: SettingsManagerProvider,
     private cache: CacheService
   ) {
     this.cache.setDefaultTTL(1200);
@@ -22,12 +22,12 @@ export class ServiceProvider {
 
   public getCookies(username: string, password: string): Observable<Array<object>> {
 
-    let body = {
+    const body = {
       'username': username,
       'password': password
     }
 
-    const cookies_request = this.http.post(ServiceProvider.baseUrl+'/cookies', body);
+    const cookies_request = this.http.post(ServiceProvider.BASEURL+'/cookies', body);
     return this.cache.loadFromObservable(username+'cookies', cookies_request);
   }
 
@@ -35,7 +35,11 @@ export class ServiceProvider {
     console.log('cookies');
     console.log(cookies);
 
-    const balance_request = this.http.post(ServiceProvider.baseUrl + '/balance', {"cookies": cookies});
+    const body = {
+      "cookies": JSON.stringify(cookies)
+    }
+
+    const balance_request = this.http.post(ServiceProvider.BASEURL + '/balance', body);
     return this.cache.loadFromObservable(username+'balance', balance_request);
     
   }

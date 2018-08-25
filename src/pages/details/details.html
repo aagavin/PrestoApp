@@ -9,41 +9,45 @@
 
 <ion-content>
   <ion-card>
-    <table>
-      <ng-container *ngFor="let row of userTable; let i = index">
-        <tr *ngIf="i !=0">
-
-          <td>
-            {{row[0]}}
-          </td>
-          <td>
-            <ng-container *ngIf="row[1] == 'Toronto Transit Commission'; else elseTemplate">
-              TTC
-            </ng-container>
-            <ng-template #elseTemplate>
-              {{row[1]}}
-            </ng-template>
-          </td>
-          <td>
-            {{row[2]}}
-          </td>
-          <td>
-            {{row[3]}}
-          </td>
-          <td>
-            {{row[4]}}
-          </td>
-          <td>
-            {{row[5]}}
-          </td>
-          <td>
-            {{row[6]}}
-          </td>
-          <td>
-            {{row[7]}}
-          </td>
-        </tr>
-      </ng-container>
-    </table>
+    <ng-container *ngIf="userTable  == null; else elseTemplate">
+      <h1>no data at this time</h1>
+    </ng-container>
+    <ng-template #elseTemplate>
+      <table>
+        <ng-container *ngFor="let row of userTable; let i = index">
+          <tr *ngIf="i !=0">
+            <td>
+              {{row[0]}}
+            </td>
+            <td>
+              <ng-container *ngIf="row[1] == 'Toronto Transit Commission'; else elseTemplate">
+                TTC
+              </ng-container>
+              <ng-template #elseTemplate>
+                {{row[1]}}
+              </ng-template>
+            </td>
+            <td>
+              {{row[2]}}
+            </td>
+            <td>
+              {{row[3]}}
+            </td>
+            <td>
+              {{row[4]}}
+            </td>
+            <td>
+              {{row[5]}}
+            </td>
+            <td>
+              {{row[6]}}
+            </td>
+            <td>
+              {{row[7]}}
+            </td>
+          </tr>
+        </ng-container>
+      </table>
+    </ng-template>
   </ion-card>
 </ion-content>
