@@ -16,13 +16,20 @@
       </h1>
     </ion-card-header>
     <ion-card-content>
-      Balance on {{card.cardData.cardMain.name}}: {{card.cardData.cardMain.balance}}
+      <b>Balance on {{card.cardData.cardMain.name}}: {{card.cardData.cardMain.balance}}</b>
+
+      <ng-container *ngFor="let otherCard of card.cardData.otherCards">
+        <hr />
+        <p>
+          {{otherCard.name}}: {{otherCard.balance}}
+        </p>
+      </ng-container>
     </ion-card-content>
   </ion-card>
 
   <ion-card>
     <ion-card-header (click)="addNewAccount()">
-      <button ion-button full>Add New Account</button>
+      <button ion-button full color="light">Add New Account</button>
     </ion-card-header>
   </ion-card>
 </ion-content>
