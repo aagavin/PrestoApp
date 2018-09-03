@@ -32,9 +32,6 @@ export class ServiceProvider {
   }
 
   public getBalance(username: string, cookies: Array<object>): Observable<object>{
-    console.log('cookies');
-    console.log(cookies);
-
     const body = {
       "cookies": JSON.stringify(cookies)
     }
