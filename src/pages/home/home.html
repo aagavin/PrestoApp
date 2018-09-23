@@ -27,9 +27,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card>
-    <ion-card-header (click)="addNewAccount()">
-      <button ion-button full color="light">Add New Account</button>
-    </ion-card-header>
-  </ion-card>
+  <ion-fab bottom right>
+    <button ion-fab mini (click)="addNewAccount()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
 </ion-content>
