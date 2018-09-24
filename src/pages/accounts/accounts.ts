@@ -68,6 +68,16 @@ export class AccountsPage {
 
   }
 
+
+  /**
+   * Go to add new account page
+   *
+   * @memberof AccountsPage
+   */
+  public addNewAccount() {
+    this.navCtrl.push('AddPage');
+  }
+
   /**
    * Delete account
    * 
