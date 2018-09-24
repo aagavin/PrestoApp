@@ -31,13 +31,14 @@ export class AddPage {
       this.alertCtrl.create({
         title: 'Added New Account',
         buttons: ['OK']
-      }).present();      
+      }).present();
+      this.navCtrl.setRoot('HomePage');
     } catch (error) {
       this.alertCtrl.create({
         title: 'Error with adding new accounts',
-        subTitle: error.getMessage(),
+        subTitle: error,
         buttons: ['OK']
-      }).present(); 
+      }).present();
     }
 
 
