@@ -9,6 +9,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
+  public selectedTheme: String = 'theme-dark';
   rootPage: any = 'HomePage';
 
   pages: Array<{ title: string, component: any }>;
@@ -20,7 +21,6 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: 'HomePage' },
       { title: 'Accounts', component: 'AccountsPage' },
-      { title: 'New Account', component: 'AddPage' },
       { title: 'Settings', component: 'SettingsPage'}
     ];
 
