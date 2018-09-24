@@ -32,14 +32,13 @@ export class HomePage {
 
     // TODO: reduce 
     this.storage.get(PrestoConstants.AccountDb).then(value => {
-      // for (const key in value) {
-      Object.keys(value).forEach(key => {
-
-        this.service.getCookies(key, value[key]).subscribe((data: Array<object>) => {
-          this.prestoData.push({ 'username': key, 'cardData': data });
+      if (value != null) {
+        Object.keys(value).forEach(key => {
+          this.service.getCookies(key, value[key]).subscribe((data: Array<object>) => {
+            this.prestoData.push({ 'username': key, 'cardData': data });
+          });
         });
-
-      });
+      }
       loader.dismiss();
     });
   }
