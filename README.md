@@ -1,3 +1,6 @@
+[![CodeFactor](https://www.codefactor.io/repository/github/aagavin/prestoapp/badge)](https://www.codefactor.io/repository/github/aagavin/prestoapp) 
+
+
 PrestoApp
 ===
 
