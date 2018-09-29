@@ -9,25 +9,31 @@
 
 <ion-content>
 
-  <ion-card *ngFor="let card of prestoData" (click)="clickHandler(card.cardData.userTable)">
+  <ion-card *ngFor="let card of prestoData" (click)="clickHandler(card.cardData.balanceTable, card.username)">
     <ion-card-header>
       <h1>
         {{card.username}}
       </h1>
     </ion-card-header>
     <ion-card-content>
-      <b>Balance on {{card.cardData.cardMain.name}}: {{card.cardData.cardMain.balance}}</b>
-
-      <ng-container *ngFor="let otherCard of card.cardData.otherCards">
+      <p>
+        <b>{{card.cardData.cardInfo.name}}: {{card.cardData.cardInfo.balance}}</b>
+      </p>
+      <p>
+        <small>{{card.cardData.cardInfo.number}}</small>
+      </p>
+      <ng-container *ngFor="let oc of card.cardData.otherCard">
         <hr />
         <p>
-          {{otherCard.name}}: {{otherCard.balance}}
+          {{oc}}
         </p>
       </ng-container>
     </ion-card-content>
   </ion-card>
 
   <ion-fab bottom right>
-    <button ion-fab (click)="addNewAccount()"><ion-icon name="add"></ion-icon></button>
+    <button ion-fab (click)="addNewAccount()">
+      <ion-icon name="add"></ion-icon>
+    </button>
   </ion-fab>
 </ion-content>

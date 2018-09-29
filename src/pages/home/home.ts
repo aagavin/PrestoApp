@@ -49,8 +49,8 @@ export class HomePage {
    * @param {{}[]} usertable 
    * @memberof HomePage
    */
-  public clickHandler(usertable: {}[]) {
-    this.navCtrl.push('DetailsPage', { userData: usertable });
+  public clickHandler(usertable: {}[], username: string) {
+    this.navCtrl.push('DetailsPage', { userData: usertable, username: username });
   }
 
   /**
