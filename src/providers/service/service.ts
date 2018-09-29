@@ -27,7 +27,7 @@ export class ServiceProvider {
       'password': password
     }
 
-    const cookies_request = this.http.post(ServiceProvider.BASEURL+'/balance', body);
+    const cookies_request = this.http.post(ServiceProvider.BASEURL+'/cookies', body);
     return this.cache.loadFromObservable(username+'cookies', cookies_request);
   }
 
