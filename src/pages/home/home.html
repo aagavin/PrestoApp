@@ -9,6 +9,14 @@
 
 <ion-content>
 
+  <ion-card *ngIf="prestoData.length == 0" (click)="addNewAccount()">
+    <ion-card-header text-center>
+      <h1>
+        No account added <br> Add a new card
+      </h1>
+    </ion-card-header>
+  </ion-card>
+
   <ion-card *ngFor="let card of prestoData" (click)="clickHandler(card.cardData.balanceTable, card.username)">
     <ion-card-header>
       <h1>
