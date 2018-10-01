@@ -30,15 +30,4 @@ export class ServiceProvider {
     const cookies_request = this.http.post(ServiceProvider.BASEURL+'/cookies', body);
     return this.cache.loadFromObservable(username+'cookies', cookies_request);
   }
-
-  public getBalance(username: string, cookies: Array<object>): Observable<object>{
-    const body = {
-      "cookies": JSON.stringify(cookies)
-    }
-
-    const balance_request = this.http.post(ServiceProvider.BASEURL + '/balance', body);
-    return this.cache.loadFromObservable(username+'balance', balance_request);
-    
-  }
-
 }

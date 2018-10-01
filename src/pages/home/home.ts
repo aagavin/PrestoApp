@@ -31,19 +31,17 @@ export class HomePage {
 
   public async ionViewDidLoad() {
     const loader = this.loadingCtrl.create();
-    loader.present();
-
-
     // TODO: reduce 
     this.storage.get(PrestoConstants.AccountDb).then(value => {
       if (value != null) {
+        loader.present();
         Object.keys(value).forEach((key, index, arr) => {
           this.service.getCookies(key, value[key]).subscribe(
             (data: Array<object>) => {
               this.prestoData.push({ 'username': key, 'cardData': data });
             },
-            console.log,
-            () => {if (index+1 === arr.length) loader.dismiss() }
+            (err) => {console.error(err); loader.dismiss()},
+            () => {if (index+1 === arr.length || arr.length === 0) loader.dismiss() }
           );
         });
       }
