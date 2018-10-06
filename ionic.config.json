@@ -1,8 +1,9 @@
 {
-  "name": "presto",
+  "name": "prestoApp",
   "integrations": {
     "cordova": {}
   },
+  "app_id": "9584b81a",
   "type": "ionic-angular",
   "pro_id": "9584b81a"
 }
