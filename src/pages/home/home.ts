@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, IonicPage, LoadingController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { Pro } from '@ionic/pro';
 import { ServiceProvider } from '../../providers/service/service';
 import { PrestoConstants } from "../../constants/prestoConstants";
+import { to } from "../../util/to";
 
 @IonicPage()
 @Component({
@@ -12,6 +14,7 @@ import { PrestoConstants } from "../../constants/prestoConstants";
 export class HomePage {
 
   public prestoData: Array<any> = [];
+  public accountCount: number = 0;
 
   /**
    * Creates an instance of HomePage.
@@ -25,27 +28,42 @@ export class HomePage {
     private service: ServiceProvider,
     private storage: Storage,
     private loadingCtrl: LoadingController) {
+      Pro.monitoring.log('Home page', { level: 'info' })
 
   }
 
 
   public async ionViewDidLoad() {
+    let accounts, err;
     const loader = this.loadingCtrl.create();
-    // TODO: reduce 
-    this.storage.get(PrestoConstants.AccountDb).then(value => {
-      if (value != null) {
-        loader.present();
-        Object.keys(value).forEach((key, index, arr) => {
-          this.service.getCookies(key, value[key]).subscribe(
-            (data: Array<object>) => {
-              this.prestoData.push({ 'username': key, 'cardData': data });
-            },
-            (err) => {console.error(err); loader.dismiss()},
-            () => {if (index+1 === arr.length || arr.length === 0) loader.dismiss() }
-          );
-        });
+    loader.present();
+
+    [err, accounts] = await to(this.storage.get(PrestoConstants.AccountDb));
+    if (err || accounts == null) {
+      console.error(err);
+      loader.dismiss();
+      Pro.monitoring.log(err, { level: 'error' });
+    }
+    else {
+      this.accountCount = Object.keys(accounts).length;
+
+      if (this.accountCount == 0) {
+        loader.dismiss();
       }
-    });
+
+      // TODO: reduce
+      Object.keys(accounts).forEach((key, index, arr) => {
+        this.service.getCookies(key, accounts[key]).subscribe(
+          (data: Array<object>) => {
+            this.prestoData.push({ 'username': key, 'cardData': data });
+          },
+          err => { console.error(err); loader.dismiss(), Pro.monitoring.log(err, { level: 'error' }) },
+          () => { if (index + 1 === arr.length || arr.length === 0) loader.dismiss() }
+        );
+      });
+
+    }
+
   }
 
   /**

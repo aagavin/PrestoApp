@@ -30,9 +30,13 @@ export class AddPage {
       await this.storage.set('accounts', accounts);
       await this.alertCtrl.create({
         title: 'Added New Account',
-        buttons: ['OK']
+        buttons: [
+          {
+            text: 'OK',
+            handler: () => { this.navCtrl.setRoot('HomePage') }
+          },
+        ]
       }).present();
-      await this.navCtrl.setRoot('HomePage');
     } catch (error) {
       this.alertCtrl.create({
         title: 'Error with adding new accounts',
