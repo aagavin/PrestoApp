@@ -13,8 +13,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { SettingsManagerProvider } from '../providers/settings-manager/settings-manager';
 
 
-Pro.init('YOUR_APP_ID', {
-  appVersion: '9584b81a'
+Pro.init('9584b81a', {
+  appVersion: '0.0.1'
 });
 
 @Injectable()
