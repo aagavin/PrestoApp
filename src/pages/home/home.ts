@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, IonicPage, LoadingController } from 'ionic-angular';
+import { NavController, IonicPage, LoadingController, Loading } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Pro } from '@ionic/pro';
 import { ServiceProvider } from '../../providers/service/service';
@@ -27,22 +27,18 @@ export class HomePage {
     public navCtrl: NavController,
     private service: ServiceProvider,
     private storage: Storage,
-    private loadingCtrl: LoadingController) {
-      Pro.monitoring.log('Home page', { level: 'info' })
-
-  }
+    private loadingCtrl: LoadingController) {  }
 
 
   public async ionViewDidLoad() {
     let accounts, err;
-    const loader = this.loadingCtrl.create();
+    const loader: Loading = this.loadingCtrl.create();
     loader.present();
 
     [err, accounts] = await to(this.storage.get(PrestoConstants.AccountDb));
     if (err || accounts == null) {
-      console.error(err);
       loader.dismiss();
-      Pro.monitoring.log(err, { level: 'error' });
+      err ? Pro.monitoring.log(err, { level: 'error' }) : '';
     }
     else {
       this.accountCount = Object.keys(accounts).length;
@@ -57,13 +53,19 @@ export class HomePage {
           (data: Array<object>) => {
             this.prestoData.push({ 'username': key, 'cardData': data });
           },
-          err => { console.error(err); loader.dismiss(), Pro.monitoring.log(err, { level: 'error' }) },
+          err => this.handleError(err, key, loader),
           () => { if (index + 1 === arr.length || arr.length === 0) loader.dismiss() }
         );
       });
 
     }
 
+  }
+
+  private handleError(err, username, loader: Loading){
+    console.error(err);
+    loader.dismiss();
+    Pro.monitoring.log(err, { level: 'error' });
   }
 
   /**
