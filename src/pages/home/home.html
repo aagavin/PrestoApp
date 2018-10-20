@@ -20,15 +20,15 @@
   <ion-card *ngFor="let card of prestoData" (click)="clickHandler(card.cardData.balanceTable, card.username)">
     <ion-card-header>
       <h1>
-        {{card.username}}
+        {{card?.username}}
       </h1>
     </ion-card-header>
     <ion-card-content>
       <p>
-        <b>{{card.cardData.cardInfo.name}}: {{card.cardData.cardInfo.balance}}</b>
+        <b>{{card?.cardData.cardInfo.name}}: {{card.cardData.cardInfo.balance}}</b>
       </p>
       <p>
-        <small>{{card.cardData.cardInfo.number}}</small>
+        <small>{{card?.cardData.cardInfo.number}}</small>
       </p>
       <ng-container *ngFor="let oc of card.cardData.otherCard">
         <hr />
