@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, IonicPage, LoadingController, Loading } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import { Pro } from '@ionic/pro';
 import { ServiceProvider } from '../../providers/service/service';
 import { PrestoConstants } from "../../constants/prestoConstants";
 import { to } from "../../util/to";
@@ -38,7 +37,6 @@ export class HomePage {
     [err, accounts] = await to(this.storage.get(PrestoConstants.AccountDb));
     if (err || accounts == null) {
       loader.dismiss();
-      err ? Pro.monitoring.log(err, { level: 'error' }) : '';
     }
     else {
       this.accountCount = Object.keys(accounts).length;
@@ -65,7 +63,6 @@ export class HomePage {
   private handleError(err, username, loader: Loading){
     console.error(err);
     loader.dismiss();
-    Pro.monitoring.log(err, { level: 'error' });
   }
 
   /**
