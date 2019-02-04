@@ -4,6 +4,16 @@
 PrestoApp
 ===
 
+--------
+Deprecated due to official app release
+===
+
+
+![USE THE OFFICIAL APP](https://www.prestocard.ca/en/about/presto-app)
+
+-------
+
+
 ## Home Page
 
 ![](./.github/home.png)
